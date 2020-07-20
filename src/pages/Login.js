@@ -12,6 +12,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import Header from '../Components/Header';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -37,6 +38,8 @@ export default function Login() {
   const classes = useStyles();
 
   return (
+   <>
+    <Header />
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
@@ -99,5 +102,6 @@ export default function Login() {
       <Box mt={8}>
       </Box>
     </Container>
+   </>
   );
 }
