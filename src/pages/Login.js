@@ -14,6 +14,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Header from '../Components/Header';
 import SEO from '../Components/Seo';
+import GoogleIcon from '../assets/google.png'
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -103,7 +104,19 @@ export default function Login() {
       </div>
       <Box mt={8}>
       </Box>
+      <LoginWithGoogle/>
     </Container>
    </>
   );
+}
+
+function LoginWithGoogle() {
+    return (
+        <Button fullWidth>
+            <img src={GoogleIcon}
+            style={{width: '25px', height: '25px'}}
+            alt="Google Icon" />
+            Log In with Google
+        </Button>
+    )
 }
