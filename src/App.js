@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { SnackbarProvider } from 'notistack';
 import Login from './pages/Login';
 import PageNotFound from './pages/PageNotFound';
@@ -41,15 +41,15 @@ class App extends Component {
 
 
   render() {
-    const { user, userData, access, ready } = this.state;
+    const { user, access, ready } = this.state;
 
     if (ready) {
       return (
         <SnackbarProvider>
           <Router>
             <Switch>
-              <Route exact path="/" component={withProps(Login, { user: user, access:access})}/>
-              <Route path="/student" component={Student} />
+              <Route exact path="/" component={withProps(Login, { user: user, access:access })}/>
+              <Route path="/student" component={withProps(Student, { user: user, access:access })} />
               <Route path="/educator" component={Educator} />
               <Route path="*" component={PageNotFound} />
             </Switch>
