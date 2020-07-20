@@ -1,10 +1,12 @@
 import React from "react";
 import { Typography } from "@material-ui/core";
 import { Link } from "react-router-dom";
+import SEO from "../Components/Seo";
 
 function PageNotFound() {
   return (
     <>
+    <SEO title="Page Not Found" />
       <Typography variant="h5" align="center" paragraph>
         Sorry, this page isn't available.
       </Typography>

@@ -13,6 +13,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Header from '../Components/Header';
+import SEO from '../Components/Seo';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -39,6 +40,7 @@ export default function Login() {
 
   return (
    <>
+   <SEO title="Login" />
     <Header />
     <Container component="main" maxWidth="xs">
       <CssBaseline />
