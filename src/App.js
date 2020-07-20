@@ -1,10 +1,12 @@
 import React from 'react';
-import PageNotFound from './pages/PageNotFound';
-import Login from './pages/Login';
-
+import Header from './Components/Header';
+import Login from './pages/Login'
 function App() {
   return (
-    <Login />
+    <>
+      <Header />
+      <Login />
+    </>
   );
 }
 
