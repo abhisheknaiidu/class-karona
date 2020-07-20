@@ -2,7 +2,8 @@
  
 - Components:
 
-* [x] login page
-* [ ] 
-* [ ] 
-* [ ] 
+* [ ] Navbar
+* [ ] login page
+* [ ] Student Dashboard
+* [ ] Educator Dashboard
+ 
