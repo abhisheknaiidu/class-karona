@@ -125,7 +125,9 @@ authentication.signInWithAuthProvider = (providerId) => {
               resolve(user);
             } else {
               userDocumentReference
-                .set({}, { merge: true })
+                .set({
+                    role: "student"
+                }, { merge: true })
                 .then((value) => {
                   analytics.logEvent('rest_login', {
                     method: providerId,
