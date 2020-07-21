@@ -183,7 +183,7 @@ function Student(props) {
             </IconButton>
           </div>
           <Divider />
-          <List><mainListItems /></List>
+          <List>{mainListItems}</List>
           <Divider />
           <List>{secondaryListItems}</List>
         </Drawer>
