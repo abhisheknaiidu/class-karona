@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
@@ -106,23 +106,16 @@ const styles = (theme) => ({
   },
 });
 
-class Student extends Component {
+function Student(props) {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      open: false,
-    };
-  }
+  const [open, setOpen] = useState(false);
 
-  handleDrawerState = (drawerState) => {
-    this.setState({
-      open: drawerState
-    })
+  function handleDrawerState(drawerState) {
+    setOpen(drawerState)
   };
 
-  createSnackbar = (message, variant) => {
-    this.props.enqueueSnackbar(message, {
+  function createSnackbar(message, variant) {
+    props.enqueueSnackbar(message, {
       anchorOrigin: {
         horizontal: 'right',
         vertical: 'bottom',
@@ -131,15 +124,13 @@ class Student extends Component {
     });
   };
 
-  signOut = () => {
+  function signOut() {
     authentication.signOut().then(() => {
-      this.createSnackbar('Signed out Successfully!', 'success');
+      createSnackbar('Signed out Successfully!', 'success');
     });
   };
 
-  render() {
-    const { classes, access, user } = this.props;
-    const { open } = this.state;
+    const { classes, access, user } = props;
     
 
     const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
@@ -159,7 +150,7 @@ class Student extends Component {
               edge="start"
               color="inherit"
               aria-label="open drawer"
-              onClick={() => this.handleDrawerState(true)}
+              onClick={() => handleDrawerState(true)}
               className={clsx(classes.menuButton, open && classes.menuButtonHidden)}
             >
               <MenuIcon />
@@ -172,7 +163,7 @@ class Student extends Component {
                 <NotificationsIcon />
               </Badge>
             </IconButton>
-            <IconButton color="inherit" onClick={() => this.signOut()}>
+            <IconButton color="inherit" onClick={() => signOut()}>
               <Badge badgeContent={0} color="secondary">
                 <ExitToAppTwoToneIcon />
               </Badge>
@@ -187,7 +178,7 @@ class Student extends Component {
           open={open}
         >
           <div className={classes.toolbarIcon}>
-            <IconButton onClick={() => this.handleDrawerState(false)}>
+            <IconButton onClick={() => handleDrawerState(false)}>
               <ChevronLeftIcon />
             </IconButton>
           </div>
@@ -214,7 +205,6 @@ class Student extends Component {
       </div>
     );
   }
-}
 
 Student.propTypes = {
   classes: PropTypes.object.isRequired,

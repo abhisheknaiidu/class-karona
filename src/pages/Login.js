@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -35,14 +35,10 @@ const styles = (theme) => ({
   },
 });
 
-class Login extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
+function Login(props) {
 
-  createSnackbar = (message, variant) => {
-    this.props.enqueueSnackbar(message, {
+  function createSnackbar(message, variant) {
+    props.enqueueSnackbar(message, {
       anchorOrigin: {
         horizontal: 'right',
         vertical: 'bottom',
@@ -51,11 +47,11 @@ class Login extends Component {
     });
   };
 
-  signInWithAuthProvider = (providerId) => {
+  function signInWithAuthProvider(providerId) {
     authentication
       .signInWithAuthProvider(providerId)
       .then((user) => {
-        this.createSnackbar(
+         createSnackbar(
           `Signed in as ${user.displayName || user.email}`,
           'success',
         );
@@ -74,18 +70,17 @@ class Login extends Component {
           case 'auth/popup-blocked':
           case 'auth/popup-closed-by-user':
           case 'auth/unauthorized-domain':
-            this.createSnackbar(message, 'error');
+            createSnackbar(message, 'error');
             return;
 
           default:
-            this.createSnackbar(message, 'error');
+            createSnackbar(message, 'error');
             return;
         }
       });
   };
 
-  render() {
-    const { classes, user, access } = this.props;
+    const { classes, user, access } = props;
 
     if (user && access) {
       return (
@@ -110,7 +105,7 @@ class Login extends Component {
           <Box mt={8}>
           </Box>
           <Button fullWidth
-            onClick={() => this.signInWithAuthProvider('google.com')}>
+            onClick={() => signInWithAuthProvider('google.com')}>
             <img src={GoogleIcon}
               style={{ width: '25px', height: '25px' }}
               alt="Google Icon" />
@@ -119,9 +114,7 @@ class Login extends Component {
         </Container>
       </>
     );
-  }
 }
-
 
 Login.propTypes = {
   classes: PropTypes.object.isRequired,
