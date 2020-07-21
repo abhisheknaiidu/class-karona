@@ -50,7 +50,7 @@ class App extends Component {
             <Switch>
               <Route exact path="/" component={withProps(Login, { user: user, access:access })}/>
               <Route path="/student" component={withProps(Student, { user: user, access:access })} />
-              <Route path="/educator" component={Educator} />
+              <Route path="/educator" component={withProps(Educator, { user: user, access:access })} />
               <Route path="*" component={PageNotFound} />
             </Switch>
           </Router>

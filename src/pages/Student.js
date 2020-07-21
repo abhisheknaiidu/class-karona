@@ -18,7 +18,7 @@ import Paper from '@material-ui/core/Paper';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
-import { mainListItems, secondaryListItems } from '../Components/listItems';
+import { mainListItems, secondaryListItems } from '../Components/listItemsStudent';
 import ScheduledClasses from '../Components/ScheduledClasses';
 import authentication from '../services/authentication';
 import { withSnackbar } from 'notistack';
@@ -183,7 +183,7 @@ function Student(props) {
             </IconButton>
           </div>
           <Divider />
-          <List>{mainListItems}</List>
+          <List><mainListItems /></List>
           <Divider />
           <List>{secondaryListItems}</List>
         </Drawer>

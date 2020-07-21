@@ -18,7 +18,7 @@ import Paper from '@material-ui/core/Paper';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
-import { mainListItems, secondaryListItems } from '../Components/listItems';
+import { mainListItems, secondaryListItems } from '../Components/listItemsEducator';
 import ScheduledClasses from '../Components/ScheduledClasses';
 import authentication from '../services/authentication';
 import { withSnackbar } from 'notistack';
@@ -106,7 +106,7 @@ const styles = (theme) => ({
   },
 });
 
-function Student(props) {
+function Educator(props) {
 
   const [open, setOpen] = useState(false);
 
@@ -157,7 +157,7 @@ function Student(props) {
             </IconButton>
             <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
               My Desk
-          </Typography>
+            </Typography>
             <IconButton color="inherit">
               <Badge badgeContent={0} color="secondary">
                 <NotificationsIcon />
@@ -206,8 +206,8 @@ function Student(props) {
     );
   }
 
-Student.propTypes = {
+Educator.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withSnackbar(withStyles(styles)(Student));
+export default withSnackbar(withStyles(styles)(Educator));
