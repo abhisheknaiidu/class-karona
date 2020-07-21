@@ -103,7 +103,7 @@ const styles = (theme) => ({
     flexDirection: 'column',
   },
   fixedHeight: {
-    height: 240,
+    height: 360,
   },
 });
 

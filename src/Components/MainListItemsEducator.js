@@ -57,19 +57,19 @@ export default function NestedList() {
             <ListItemIcon>
               <BarChartIcon />
             </ListItemIcon>
-            <ListItemText primary="1st Year" />
+            <ListItemText primary="Freshman Year" />
           </ListItem>
           <ListItem button className={classes.nested}>
             <ListItemIcon>
               <BarChartIcon />
             </ListItemIcon>
-            <ListItemText primary="2nd Year" />
+            <ListItemText primary="Sophomore Year" />
           </ListItem>
           <ListItem button className={classes.nested}>
             <ListItemIcon>
               <BarChartIcon />
             </ListItemIcon>
-            <ListItemText primary="3rd Year" />
+            <ListItemText primary="Pre-final Year" />
           </ListItem>
           <ListItem button className={classes.nested}>
             <ListItemIcon>
