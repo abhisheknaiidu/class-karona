@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { Component } from 'react';
 import clsx from 'clsx';
-import { makeStyles } from '@material-ui/core/styles';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Drawer from '@material-ui/core/Drawer';
 import Box from '@material-ui/core/Box';
@@ -19,12 +20,14 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import { mainListItems, secondaryListItems } from '../Components/listItems';
 import ScheduledClasses from '../Components/ScheduledClasses';
-import Jumbotron from 'react-bootstrap/Jumbotron';
-import { NavLink } from 'react-router-dom';
+import authentication from '../services/authentication';
+import { withSnackbar } from 'notistack';
+import { Redirect } from 'react-router-dom';
+import ExitToAppTwoToneIcon from '@material-ui/icons/ExitToAppTwoTone';
 
 const drawerWidth = 240;
 
-const useStyles = makeStyles((theme) => ({
+const styles = (theme) => ({
   root: {
     display: 'flex',
   },
@@ -101,89 +104,120 @@ const useStyles = makeStyles((theme) => ({
   fixedHeight: {
     height: 240,
   },
-}));
+});
 
-export default function Dashboard() {
-  const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
-  const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
+class Student extends Component {
 
-  return (
-    <div className={classes.root}>
-      <CssBaseline />
-      <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
-        <Toolbar className={classes.toolbar}>
-          <IconButton
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            className={clsx(classes.menuButton, open && classes.menuButtonHidden)}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-            <NavLink className="nav-link" to="/student">
-                ClassKaroNa                            
-            </NavLink>
+  constructor(props) {
+    super(props);
+    this.state = {
+      open: false,
+    };
+  }
+
+  handleDrawerState = (drawerState) => {
+    this.setState({
+      open: drawerState
+    })
+  };
+
+  createSnackbar = (message, variant) => {
+    this.props.enqueueSnackbar(message, {
+      anchorOrigin: {
+        horizontal: 'right',
+        vertical: 'bottom',
+      },
+      variant: variant,
+    });
+  };
+
+  signOut = () => {
+    authentication.signOut().then(() => {
+      this.createSnackbar('Signed out Successfully!', 'success');
+    });
+  };
+
+  render() {
+    const { classes, access, user } = this.props;
+    const { open } = this.state;
+    
+
+    const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
+
+    if(!user || access !== 'student') {
+      return (
+        <Redirect to="/" />
+      )
+    }
+
+    return (
+      <div className={classes.root}>
+        <CssBaseline />
+        <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
+          <Toolbar className={classes.toolbar}>
+            <IconButton
+              edge="start"
+              color="inherit"
+              aria-label="open drawer"
+              onClick={() => this.handleDrawerState(true)}
+              className={clsx(classes.menuButton, open && classes.menuButtonHidden)}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
+              My Desk
           </Typography>
-          <IconButton color="inherit">
-            <Badge badgeContent={4} color="secondary">
-              <NotificationsIcon />
-            </Badge>
-          </IconButton>
-        </Toolbar>
-      </AppBar>
-      <Drawer
-        variant="permanent"
-        classes={{
-          paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
-        }}
-        open={open}
-      >
-        <div className={classes.toolbarIcon}>
-          <IconButton onClick={handleDrawerClose}>
-            <ChevronLeftIcon />
-          </IconButton>
-        </div>
-        <Divider />
-        <List>{mainListItems}</List>
-        <Divider />
-        <List>{secondaryListItems}</List>
-      </Drawer>
-      <main className={classes.content}>
-        <div className={classes.appBarSpacer} />
-        <Jumbotron className="rang">
-          <div className="container">
-              <div className="row row-header">
-                  <div className="col-12 col-sm-6" align="center">
-                    <Typography component="h1" variant="h12" color="inherit" noWrap className={classes.title}>
-                      Student Dashboard
-                    </Typography>
-                  </div>
-              </div>
+            <IconButton color="inherit">
+              <Badge badgeContent={0} color="secondary">
+                <NotificationsIcon />
+              </Badge>
+            </IconButton>
+            <IconButton color="inherit" onClick={() => this.signOut()}>
+              <Badge badgeContent={0} color="secondary">
+                <ExitToAppTwoToneIcon />
+              </Badge>
+            </IconButton>
+          </Toolbar>
+        </AppBar>
+        <Drawer
+          variant="permanent"
+          classes={{
+            paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
+          }}
+          open={open}
+        >
+          <div className={classes.toolbarIcon}>
+            <IconButton onClick={() => this.handleDrawerState(false)}>
+              <ChevronLeftIcon />
+            </IconButton>
           </div>
-        </Jumbotron>
-        <Container maxWidth="lg" className={classes.container}>
-          <Grid container spacing={3}>
-            {/* ScheduledClasses */}
-            <Grid item xs={12} md={12} lg={12}>
-            
-              <Paper className={fixedHeightPaper}>
-                <ScheduledClasses />
-              </Paper>
+          <Divider />
+          <List>{mainListItems}</List>
+          <Divider />
+          <List>{secondaryListItems}</List>
+        </Drawer>
+        <main className={classes.content}>
+          <div className={classes.appBarSpacer} />
+          <Container maxWidth="lg" className={classes.container}>
+            <Grid container spacing={3}>
+              {/* ScheduledClasses */}
+              <Grid item xs={12} md={12} lg={12}>
+                <Paper className={fixedHeightPaper}>
+                  <ScheduledClasses />
+                </Paper>
+              </Grid>
+              <Box pt={4}>
+              </Box>
             </Grid>
-          <Box pt={4}>
-          </Box>
-          </Grid>
-        </Container>
-      </main>
-    </div>
-  );
+          </Container>
+        </main>
+      </div>
+    );
+  }
 }
+
+Student.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+
+export default withSnackbar(withStyles(styles)(Student));
