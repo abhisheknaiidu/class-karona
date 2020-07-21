@@ -18,7 +18,8 @@ import Paper from '@material-ui/core/Paper';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
-import { mainListItems, secondaryListItems } from '../Components/listItemsEducator';
+import { secondaryListItems } from '../Components/listItemsEducator';
+import MainListItemsEducator from '../Components/MainListItemsEducator'
 import ScheduledClasses from '../Components/ScheduledClasses';
 import authentication from '../services/authentication';
 import { withSnackbar } from 'notistack';
@@ -183,7 +184,7 @@ function Educator(props) {
             </IconButton>
           </div>
           <Divider />
-          <List>{mainListItems}</List>
+          < MainListItemsEducator/>
           <Divider />
           <List>{secondaryListItems}</List>
         </Drawer>
