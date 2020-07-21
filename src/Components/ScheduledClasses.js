@@ -22,7 +22,7 @@ function ScheduledClasses() {
     const classes = useStyles();
 
     return(
-        <div className="col-12 col-md-5 m-1">
+        <div className="col-xs-12 col-md-5 m-1">
             <Card className={classes.root}>
                 <CardActionArea>
                     <CardMedia
