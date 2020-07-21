@@ -19,6 +19,8 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import { mainListItems, secondaryListItems } from '../Components/listItems';
 import ScheduledClasses from '../Components/ScheduledClasses';
+import Jumbotron from 'react-bootstrap/Jumbotron';
+import { NavLink } from 'react-router-dom';
 
 const drawerWidth = 240;
 
@@ -52,7 +54,7 @@ const useStyles = makeStyles((theme) => ({
     }),
   },
   menuButton: {
-    marginRight: 36,
+    marginRight: 750,
   },
   menuButtonHidden: {
     display: 'none',
@@ -103,7 +105,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Dashboard() {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = React.useState(false);
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -127,7 +129,9 @@ export default function Dashboard() {
             <MenuIcon />
           </IconButton>
           <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-            Student Dashboard
+            <NavLink className="nav-link" to="/student">
+                ClassKaroNa                            
+            </NavLink>
           </Typography>
           <IconButton color="inherit">
             <Badge badgeContent={4} color="secondary">
@@ -155,10 +159,22 @@ export default function Dashboard() {
       </Drawer>
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
+        <Jumbotron className="rang">
+          <div className="container">
+              <div className="row row-header">
+                  <div className="col-12 col-sm-6" align="center">
+                    <Typography component="h1" variant="h12" color="inherit" noWrap className={classes.title}>
+                      Student Dashboard
+                    </Typography>
+                  </div>
+              </div>
+          </div>
+        </Jumbotron>
         <Container maxWidth="lg" className={classes.container}>
           <Grid container spacing={3}>
             {/* ScheduledClasses */}
             <Grid item xs={12} md={12} lg={12}>
+            
               <Paper className={fixedHeightPaper}>
                 <ScheduledClasses />
               </Paper>

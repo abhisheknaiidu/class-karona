@@ -5,6 +5,7 @@ import Login from './pages/Login';
 import PageNotFound from './pages/PageNotFound';
 import Student from './pages/Student';
 import Educator from './pages/Educator';
+import './App.css'
 
 function App() {
   return (
