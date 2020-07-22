@@ -5,8 +5,10 @@ import Login from './pages/Login';
 import PageNotFound from './pages/PageNotFound';
 import Student from './pages/Student';
 import Educator from './pages/Educator';
+import InstituteAdmin from './pages/InstituteAdmin';
 import { auth, firestore } from './firebase';
 import ParticularCourse from './Components/ParticularCourse';
+
 
 const initialState = {
   ready: false,
@@ -53,6 +55,7 @@ class App extends Component {
               <Route exact path="/student" component={withProps(Student, { user: user, access:access })} />
               <Route path="/educator" component={withProps(Educator, { user: user, access:access })} />
               <Route exact path="/student/courseId" component={withProps(ParticularCourse, { user: user, access:access })} />
+              <Route path="/instituteadmin" component={withProps(InstituteAdmin, { user: user, access:access })} />
               <Route path="*" component={PageNotFound} />
             </Switch>
           </Router>
