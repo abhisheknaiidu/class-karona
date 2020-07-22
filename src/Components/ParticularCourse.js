@@ -18,13 +18,12 @@ import Paper from '@material-ui/core/Paper';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
-import { mainListItems, secondaryListItems } from '../Components/listItemsStudent';
-import ScheduledClassesStudent from '../Components/ScheduledClassesStudent';
+import { mainListItems, secondaryListItems } from './ListItemsCourse';
 import authentication from '../services/authentication';
 import { withSnackbar } from 'notistack';
 import { Redirect } from 'react-router-dom';
 import ExitToAppTwoToneIcon from '@material-ui/icons/ExitToAppTwoTone';
-import NotificationsStudent from '../Components/NotificationsStudent';
+import RecentActivityCourse from './RecentActivityCourse';
 
 const drawerWidth = 240;
 
@@ -107,7 +106,7 @@ const styles = (theme) => ({
   },
 });
 
-function Student(props) {
+function ParticularCourse(props) {
 
   const [open, setOpen] = useState(false);
 
@@ -133,6 +132,9 @@ function Student(props) {
 
     const { classes, access, user } = props;
     
+
+    const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
+
     if(!user || access !== 'student') {
       return (
         <Redirect to="/" />
@@ -189,10 +191,10 @@ function Student(props) {
           <div className={classes.appBarSpacer} />
           <Container maxWidth="lg" className={classes.container}>
             <Grid container spacing={3}>
-              {/* ScheduledClassesStudent */}
+                <RecentActivityCourse />
               <Grid item xs={12} md={12} lg={12}>
-                  <NotificationsStudent />
-                  <ScheduledClassesStudent />
+                <Paper className={fixedHeightPaper}>
+                </Paper>
               </Grid>
               <Box pt={4}>
               </Box>
@@ -203,8 +205,8 @@ function Student(props) {
     );
   }
 
-Student.propTypes = {
+ParticularCourse.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withSnackbar(withStyles(styles)(Student));
+export default withSnackbar(withStyles(styles)(ParticularCourse));
