@@ -23,6 +23,7 @@ function ScheduledClasses() {
 
     return(
         <div className="col-12 col-md-5 m-1">
+            <h1>My Courses</h1>
             <Card className={classes.root}>
                 <CardActionArea>
                     <CardMedia
@@ -38,8 +39,8 @@ function ScheduledClasses() {
                         React is an open-source JavaScript library for building user interfaces.
                     </Typography>
                     </CardContent>
-                </CardActionArea>
-                <CardActions>
+                    </CardActionArea>
+                    <CardActions>
                     <Button size="small" color="primary">
                         Go to course
                     </Button>
