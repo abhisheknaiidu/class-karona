@@ -16,7 +16,7 @@ export const secondaryListItems = (
       </ListItem>
       <ListItem button>
       <ListItemIcon>
-        <Link to='/educator/addcourse'><AddToPhotosIcon /></Link>
+        <AddToPhotosIcon />
       </ListItemIcon>
       <ListItemText primary="Add Course" />
     </ListItem>

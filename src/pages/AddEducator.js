@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Drawer from '@material-ui/core/Drawer';
-import Box from '@material-ui/core/Box';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import List from '@material-ui/core/List';
@@ -14,18 +13,20 @@ import IconButton from '@material-ui/core/IconButton';
 import Badge from '@material-ui/core/Badge';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import { secondaryListItems } from '../Components/listItemsEducator';
-import MainListItemsIA from '../Components/MainListItemsIA'
-import ScheduledClasses from '../Components/ScheduledClasses';
 import authentication from '../services/authentication';
 import { withSnackbar } from 'notistack';
 import { Redirect } from 'react-router-dom';
 import ExitToAppTwoToneIcon from '@material-ui/icons/ExitToAppTwoTone';
-// import {Form,FormGroup,Modal, ModalBody, ModalHeader, Button, Label, Input} from 'reactstrap';
+import MainListItemsAddEducator from '../Components/MainListItemsAddEducator';
+import { Button ,Row} from 'react-bootstrap';
+import FormControl from '@material-ui/core/FormControl';
+import {Input,Select} from '@material-ui/core';
+// import { makeStyles } from '@material-ui/core/styles';
+import FormLabel from '@material-ui/core/FormLabel';
 
 const drawerWidth = 240;
 
@@ -106,9 +107,24 @@ const styles = (theme) => ({
   fixedHeight: {
     height: 390,
   },
+  inputRoot: {
+    fontSize: 30
+  },
+  labelRoot: {
+    fontSize: 30,
+    color: "red",
+    "&$labelFocused": {
+      color: "purple"
+    }
+  },
+  margin: {
+    margin: theme.spacing(1),
+  }
 });
 
-function InstituteAdmin(props) {
+
+function AddEducator(props) {
+
 
   const [open, setOpen] = useState(false);
 
@@ -186,31 +202,83 @@ function InstituteAdmin(props) {
               </IconButton>
             </div>
             <Divider />
-              < MainListItemsIA />
+              <MainListItemsAddEducator />
             <Divider />
             <List>{secondaryListItems}</List>
           </Drawer>
           <main className={classes.content}>
-            <div className={classes.appBarSpacer} />
-            <Container maxWidth="lg" className={classes.container}>
-              <Grid container spacing={3}>
-                <Grid item xs={12} md={12} lg={12}>
-                  <Paper className={fixedHeightPaper}>
-                    <ScheduledClasses />
-                  </Paper>
+            <div className={classes.appBarSpacer} xs={12} md={6} lg={3}/>
+            <Container maxWidth="lg" style={{marginTop: '60px'}}>
+              <Grid container spacing={2}>
+                <Grid item lg={12}>
+                  <Grid container justify="center" alignItems="center" spacing={40}>
+                    <h1>Add Educator :</h1>
+                  </Grid>
                 </Grid>
-                <Box pt={4}>
-                </Box>
               </Grid>
-            </Container>
+              <Grid container spacing={0} style={{marginTop: '10px',marginLeft: '300px'}}>                
+                <Grid item lg={12} className="d-flex">
+                  <FormControl>
+                    <Row>
+                      <FormLabel style={{marginRight: '58px'}}>Educator Title :</FormLabel>
+                      <Select native placeholder="Title">
+                        <option aria-label="None" value="" />
+                        <option value={10}>Prof.</option>
+                        <option value={20}>Assisstant Prof.</option>
+                        <option value={30}>Dr.</option>
+                      </Select>
+                    </Row>
+                  </FormControl>
+                </Grid>
+                <Grid item lg={12} className="d-flex">
+                  <FormControl>
+                    <Row>
+                      <FormLabel style={{marginRight: '20px'}}>Educator First Name :</FormLabel>
+                      <Input id="my-input" aria-describedby="my-helper-text" placeholder="  Without Title"/>
+                    </Row>
+                  </FormControl>
+                </Grid>
+                <Grid item lg={12} className="d-flex">
+                  <FormControl>
+                    <Row>
+                      <FormLabel style={{marginRight: '20px'}}>Educator Last Name :</FormLabel>
+                      <Input id="my-input" aria-describedby="my-helper-text" placeholder="  Last Name"/>
+                    </Row>
+                  </FormControl>
+                </Grid>
+                <Grid item lg={12} className="d-flex">
+                  <FormControl>
+                    <Row>
+                      <FormLabel style={{marginRight: '20px'}}>Educator Department :</FormLabel>
+                      <Select native>
+                        <option aria-label="None" value="" />
+                        <option value={10}>CSE</option>
+                        <option value={20}>ECE</option>
+                        <option value={30}>ME</option>
+                        <option value={30}>Design</option>
+                      </Select>
+                    </Row>
+                  </FormControl>
+                </Grid>
+              </Grid>
+              <Grid container spacing={2} style={{marginTop: '20px'}}>
+                <Grid item lg={12}>
+                  <Grid container justify="center" alignItems="center" spacing={40}>
+                  <Button variant="contained" size="large" color="primary" className={classes.margin}>
+                    Add Educator
+                  </Button>
+                  </Grid>
+                </Grid>
+              </Grid>
+            </Container>  
           </main>
         </div>
       </>
     );
   }
 
-InstituteAdmin.propTypes = {
+AddEducator.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withSnackbar(withStyles(styles)(InstituteAdmin));
+export default withSnackbar(withStyles(styles)(AddEducator));
