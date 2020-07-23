@@ -105,7 +105,7 @@ const styles = (theme) => ({
   },
 });
 
-function RecentNotes(props) {
+function RecentStreams(props) {
 
   const [open, setOpen] = useState(false);
 
@@ -200,8 +200,8 @@ function RecentNotes(props) {
     );
   }
 
-RecentNotes.propTypes = {
+RecentStreams.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withSnackbar(withStyles(styles)(RecentNotes));
+export default withSnackbar(withStyles(styles)(RecentStreams));

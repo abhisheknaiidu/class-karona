@@ -6,6 +6,7 @@ import DashboardIcon from '@material-ui/icons/Dashboard';
 import PeopleIcon from '@material-ui/icons/People';
 import BarChartIcon from '@material-ui/icons/BarChart';
 import AssignmentIcon from '@material-ui/icons/Assignment';
+import AccountBalanceIcon from '@material-ui/icons/AccountBalance';
 import { Link } from 'react-router-dom';
 
 export const mainListItems = (
@@ -39,6 +40,14 @@ export const mainListItems = (
 
 export const secondaryListItems = (
   <div>
+   <Link style={{ textDecoration:'none', color: 'white' }} to="/student/attendence">
+    <ListItem button>
+      <ListItemIcon>
+        < AccountBalanceIcon />
+      </ListItemIcon>
+      <ListItemText primary="Time Table" />
+    </ListItem>
+    </Link>
     <Link style={{ textDecoration:'none', color: 'white' }} to="/student/recent_notes">
     <ListItem button>
       <ListItemIcon>

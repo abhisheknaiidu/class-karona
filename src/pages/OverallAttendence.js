@@ -22,7 +22,7 @@ import authentication from '../services/authentication';
 import { withSnackbar } from 'notistack';
 import { Redirect } from 'react-router-dom';
 import ExitToAppTwoToneIcon from '@material-ui/icons/ExitToAppTwoTone';
-import TimeTableStudent from '../Components/TimeTableStudent';
+import AttendenceStudent from '../Components/AttendenceStudent';
 
 const drawerWidth = 240;
 
@@ -105,7 +105,7 @@ const styles = (theme) => ({
   },
 });
 
-function TimeTable(props) {
+function OverallAttendence(props) {
 
   const [open, setOpen] = useState(false);
 
@@ -189,7 +189,7 @@ function TimeTable(props) {
             <Grid container spacing={3}>
               {/* ScheduledClassesStudent */}
               <Grid item xs={12} md={12} lg={12}>
-                  <TimeTableStudent />
+                  <AttendenceStudent />
               </Grid>
               <Box pt={4}>
               </Box>
@@ -200,8 +200,8 @@ function TimeTable(props) {
     );
   }
 
-TimeTable.propTypes = {
+OverallAttendence.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withSnackbar(withStyles(styles)(TimeTable));
+export default withSnackbar(withStyles(styles)(OverallAttendence));
