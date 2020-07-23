@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Drawer from '@material-ui/core/Drawer';
+import Box from '@material-ui/core/Box';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import List from '@material-ui/core/List';
@@ -16,17 +17,12 @@ import Grid from '@material-ui/core/Grid';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
-import { secondaryListItems } from '../Components/listItemsAddCourse';
-import MainListItemsEducator from '../Components/MainListItemsEducator'
+import { mainListItems, secondaryListItems } from '../Components/listItemsStudent';
 import authentication from '../services/authentication';
 import { withSnackbar } from 'notistack';
 import { Redirect } from 'react-router-dom';
 import ExitToAppTwoToneIcon from '@material-ui/icons/ExitToAppTwoTone';
-import { Button ,Row} from 'react-bootstrap';
-import FormControl from '@material-ui/core/FormControl';
-import {Input,Select} from '@material-ui/core';
-// import { makeStyles } from '@material-ui/core/styles';
-import FormLabel from '@material-ui/core/FormLabel';
+import TimeTableStudent from '../Components/TimeTableStudent';
 
 const drawerWidth = 240;
 
@@ -59,9 +55,9 @@ const styles = (theme) => ({
       duration: theme.transitions.duration.enteringScreen,
     }),
   },
-  menuButton: {
-    marginRight: 750,
-  },
+  // menuButton: {
+  //   marginRight: 750,
+  // },
   menuButtonHidden: {
     display: 'none',
   },
@@ -109,7 +105,7 @@ const styles = (theme) => ({
   },
 });
 
-function AddCourse(props) {
+function RecentNotes(props) {
 
   const [open, setOpen] = useState(false);
 
@@ -183,70 +179,29 @@ function AddCourse(props) {
             </IconButton>
           </div>
           <Divider />
-          < MainListItemsEducator/>
+          <List>{mainListItems}</List>
           <Divider />
           <List>{secondaryListItems}</List>
         </Drawer>
         <main className={classes.content}>
           <div className={classes.appBarSpacer} />
-          <Container maxWidth="lg" style={{marginTop: '60px'}}>
-              <Grid container spacing={2}>
-                <Grid item lg={12}>
-                  <Grid container justify="center" alignItems="center" spacing={40}>
-                    <h1>Add Course :</h1>
-                  </Grid>
-                </Grid>
+          <Container maxWidth="lg" className={classes.container}>
+            <Grid container spacing={3}>
+              {/* ScheduledClassesStudent */}
+              <Grid item xs={12} md={12} lg={12}>
+                  <TimeTableStudent />
               </Grid>
-              <Grid container spacing={0} style={{marginTop: '10px',marginLeft: '300px'}}>                
-                <Grid item lg={12} className="d-flex">
-                  <FormControl>
-                    <Row>
-                      <FormLabel style={{marginRight: '20px'}}>Course Name :</FormLabel>
-                      <Input id="my-input" aria-describedby="my-helper-text" placeholder="  name"/>
-                    </Row>
-                  </FormControl>
-                </Grid>
-                <Grid item lg={12} className="d-flex">
-                  <FormControl>
-                    <Row>
-                      <FormLabel style={{marginRight: '20px'}}>Course Code :</FormLabel>
-                      <Input id="my-input" aria-describedby="my-helper-text" placeholder="  code"/>
-                    </Row>
-                  </FormControl>
-                </Grid>
-                <Grid item lg={12} className="d-flex">
-                  <FormControl>
-                    <Row>
-                      <FormLabel style={{marginRight: '20px'}}>Course For Department :</FormLabel>
-                      <Select native>
-                        <option aria-label="None" value="" />
-                        <option value={10}>Common Course</option>
-                        <option value={10}>CSE</option>
-                        <option value={20}>ECE</option>
-                        <option value={30}>ME</option>
-                        <option value={30}>Design</option>
-                      </Select>
-                    </Row>
-                  </FormControl>
-                </Grid>
-              </Grid>
-              <Grid container spacing={2} style={{marginTop: '20px'}}>
-                <Grid item lg={12}>
-                  <Grid container justify="center" alignItems="center" spacing={40}>
-                  <Button variant="contained" size="large" color="primary" className={classes.margin}>
-                    Add Course
-                  </Button>
-                  </Grid>
-                </Grid>
-              </Grid>
-            </Container>
+              <Box pt={4}>
+              </Box>
+            </Grid>
+          </Container>
         </main>
       </div>
     );
   }
 
-AddCourse.propTypes = {
+RecentNotes.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withSnackbar(withStyles(styles)(AddCourse));
+export default withSnackbar(withStyles(styles)(RecentNotes));

@@ -10,7 +10,6 @@ import BarChartIcon from '@material-ui/icons/BarChart';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
-import {Link} from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   root: {
