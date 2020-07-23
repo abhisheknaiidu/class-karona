@@ -8,6 +8,8 @@ import Educator from './pages/Educator';
 import InstituteAdmin from './pages/InstituteAdmin';
 import { auth, firestore } from './firebase';
 import ParticularCourse from './Components/ParticularCourse';
+import AddEducator from './pages/AddEducator';
+import AddCourse from './pages/AddCourse';
 
 
 const initialState = {
@@ -53,9 +55,11 @@ class App extends Component {
             <Switch>
               <Route exact path="/" component={withProps(Login, { user: user, access:access })}/>
               <Route exact path="/student" component={withProps(Student, { user: user, access:access })} />
-              <Route path="/educator" component={withProps(Educator, { user: user, access:access })} />
+              <Route exact path="/educator" component={withProps(Educator, { user: user, access:access })} />
+              <Route exact path="/educator/addcourse" component={withProps(AddCourse, { user: user, access:access })} />
               <Route exact path="/student/courseId" component={withProps(ParticularCourse, { user: user, access:access })} />
-              <Route path="/instituteadmin" component={withProps(InstituteAdmin, { user: user, access:access })} />
+              <Route exact path="/instituteadmin/addeducator" component={withProps(AddEducator, { user: user, access:access })} />
+              <Route exact path="/instituteadmin" component={withProps(InstituteAdmin, { user: user, access:access })} />
               <Route path="*" component={PageNotFound} />
             </Switch>
           </Router>

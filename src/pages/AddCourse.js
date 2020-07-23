@@ -14,16 +14,22 @@ import IconButton from '@material-ui/core/IconButton';
 import Badge from '@material-ui/core/Badge';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
-import { mainListItems, secondaryListItems } from '../Components/listItemsStudent';
-import ScheduledClassesStudent from '../Components/ScheduledClassesStudent';
+import { secondaryListItems } from '../Components/listItemsAddCourse';
+import MainListItemsEducator from '../Components/MainListItemsEducator'
+import ScheduledClasses from '../Components/ScheduledClasses';
 import authentication from '../services/authentication';
 import { withSnackbar } from 'notistack';
 import { Redirect } from 'react-router-dom';
 import ExitToAppTwoToneIcon from '@material-ui/icons/ExitToAppTwoTone';
-import NotificationsStudent from '../Components/NotificationsStudent';
+import { Button ,Row} from 'react-bootstrap';
+import FormControl from '@material-ui/core/FormControl';
+import {Input,Select} from '@material-ui/core';
+// import { makeStyles } from '@material-ui/core/styles';
+import FormLabel from '@material-ui/core/FormLabel';
 
 const drawerWidth = 240;
 
@@ -56,9 +62,9 @@ const styles = (theme) => ({
       duration: theme.transitions.duration.enteringScreen,
     }),
   },
-  // menuButton: {
-  //   marginRight: 750,
-  // },
+  menuButton: {
+    marginRight: 750,
+  },
   menuButtonHidden: {
     display: 'none',
   },
@@ -106,7 +112,7 @@ const styles = (theme) => ({
   },
 });
 
-function Student(props) {
+function AddCourse(props) {
 
   const [open, setOpen] = useState(false);
 
@@ -132,6 +138,9 @@ function Student(props) {
 
     const { classes, access, user } = props;
     
+
+    const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
+
     if(!user || access !== 'student') {
       return (
         <Redirect to="/" />
@@ -180,30 +189,70 @@ function Student(props) {
             </IconButton>
           </div>
           <Divider />
-          <List>{mainListItems}</List>
+          < MainListItemsEducator/>
           <Divider />
           <List>{secondaryListItems}</List>
         </Drawer>
         <main className={classes.content}>
           <div className={classes.appBarSpacer} />
-          <Container maxWidth="lg" className={classes.container}>
-            <Grid container spacing={3}>
-              {/* ScheduledClassesStudent */}
-              <Grid item xs={12} md={12} lg={12}>
-                  <NotificationsStudent />
-                  <ScheduledClassesStudent />
+          <Container maxWidth="lg" style={{marginTop: '60px'}}>
+              <Grid container spacing={2}>
+                <Grid item lg={12}>
+                  <Grid container justify="center" alignItems="center" spacing={40}>
+                    <h1>Add Course :</h1>
+                  </Grid>
+                </Grid>
               </Grid>
-              <Box pt={4}>
-              </Box>
-            </Grid>
-          </Container>
+              <Grid container spacing={0} style={{marginTop: '10px',marginLeft: '300px'}}>                
+                <Grid item lg={12} className="d-flex">
+                  <FormControl>
+                    <Row>
+                      <FormLabel style={{marginRight: '20px'}}>Course Name :</FormLabel>
+                      <Input id="my-input" aria-describedby="my-helper-text" placeholder="  name"/>
+                    </Row>
+                  </FormControl>
+                </Grid>
+                <Grid item lg={12} className="d-flex">
+                  <FormControl>
+                    <Row>
+                      <FormLabel style={{marginRight: '20px'}}>Course Code :</FormLabel>
+                      <Input id="my-input" aria-describedby="my-helper-text" placeholder="  code"/>
+                    </Row>
+                  </FormControl>
+                </Grid>
+                <Grid item lg={12} className="d-flex">
+                  <FormControl>
+                    <Row>
+                      <FormLabel style={{marginRight: '20px'}}>Course For Department :</FormLabel>
+                      <Select native>
+                        <option aria-label="None" value="" />
+                        <option value={10}>Common Course</option>
+                        <option value={10}>CSE</option>
+                        <option value={20}>ECE</option>
+                        <option value={30}>ME</option>
+                        <option value={30}>Design</option>
+                      </Select>
+                    </Row>
+                  </FormControl>
+                </Grid>
+              </Grid>
+              <Grid container spacing={2} style={{marginTop: '20px'}}>
+                <Grid item lg={12}>
+                  <Grid container justify="center" alignItems="center" spacing={40}>
+                  <Button variant="contained" size="large" color="primary" className={classes.margin}>
+                    Add Course
+                  </Button>
+                  </Grid>
+                </Grid>
+              </Grid>
+            </Container>
         </main>
       </div>
     );
   }
 
-Student.propTypes = {
+AddCourse.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withSnackbar(withStyles(styles)(Student));
+export default withSnackbar(withStyles(styles)(AddCourse));
