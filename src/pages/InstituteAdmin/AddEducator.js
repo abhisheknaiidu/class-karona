@@ -16,12 +16,12 @@ import Grid from '@material-ui/core/Grid';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
-import { secondaryListItems } from '../Components/listItemsAddCourse';
-import MainListItemsEducator from '../Components/MainListItemsEducator'
-import authentication from '../services/authentication';
+import { secondaryListItems } from '../../Components/ListItems/listItemsEducator';
+import authentication from '../../services/authentication';
 import { withSnackbar } from 'notistack';
 import { Redirect } from 'react-router-dom';
 import ExitToAppTwoToneIcon from '@material-ui/icons/ExitToAppTwoTone';
+import MainListItemsAddEducator from '../../Components/MainLists/MainListItemsAddEducator';
 import { Button ,Row} from 'react-bootstrap';
 import FormControl from '@material-ui/core/FormControl';
 import {Input,Select} from '@material-ui/core';
@@ -107,9 +107,24 @@ const styles = (theme) => ({
   fixedHeight: {
     height: 390,
   },
+  inputRoot: {
+    fontSize: 30
+  },
+  labelRoot: {
+    fontSize: 30,
+    color: "red",
+    "&$labelFocused": {
+      color: "purple"
+    }
+  },
+  margin: {
+    margin: theme.spacing(1),
+  }
 });
 
-function AddCourse(props) {
+
+function AddEducator(props) {
+
 
   const [open, setOpen] = useState(false);
 
@@ -135,6 +150,7 @@ function AddCourse(props) {
 
     const { classes, access, user } = props;
     
+
     if(!user || access !== 'student') {
       return (
         <Redirect to="/" />
@@ -142,85 +158,98 @@ function AddCourse(props) {
     }
 
     return (
-      <div className={classes.root}>
-        <CssBaseline />
-        <AppBar position="fixed" className={clsx(classes.appBar, open && classes.appBarShift)}>
-          <Toolbar className={classes.toolbar}>
-            <IconButton
-              edge="start"
-              color="inherit"
-              aria-label="open drawer"
-              onClick={() => handleDrawerState(true)}
-              className={clsx(classes.menuButton, open && classes.menuButtonHidden)}
-            >
-              <MenuIcon />
-            </IconButton>
-            <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-              My Desk
-            </Typography>
-            <IconButton color="inherit">
-              <Badge badgeContent={0} color="secondary">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
-            <IconButton color="inherit" onClick={() => signOut()}>
-              <Badge badgeContent={0} color="secondary">
-                <ExitToAppTwoToneIcon />
-              </Badge>
-            </IconButton>
-          </Toolbar>
-        </AppBar>
-        <Drawer
-          variant="permanent"
-          classes={{
-            paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
-          }}
-          open={open}
-        >
-          <div className={classes.toolbarIcon}>
-            <IconButton onClick={() => handleDrawerState(false)}>
-              <ChevronLeftIcon />
-            </IconButton>
-          </div>
-          <Divider />
-          < MainListItemsEducator/>
-          <Divider />
-          <List>{secondaryListItems}</List>
-        </Drawer>
-        <main className={classes.content}>
-          <div className={classes.appBarSpacer} />
-          <Container maxWidth="lg" style={{marginTop: '60px'}}>
+      <>
+        <div className={classes.root}>
+          <CssBaseline />
+          <AppBar position="fixed" className={clsx(classes.appBar, open && classes.appBarShift)}>
+            <Toolbar className={classes.toolbar}>
+              <IconButton
+                edge="start"
+                color="inherit"
+                aria-label="open drawer"
+                onClick={() => handleDrawerState(true)}
+                className={clsx(classes.menuButton, open && classes.menuButtonHidden)}
+              >
+                <MenuIcon />
+              </IconButton>
+              <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
+                My Desk
+              </Typography>
+              <IconButton color="inherit">
+                <Badge badgeContent={0} color="secondary">
+                  <NotificationsIcon />
+                </Badge>
+              </IconButton>
+              <IconButton color="inherit" onClick={() => signOut()}>
+                <Badge badgeContent={0} color="secondary">
+                  <ExitToAppTwoToneIcon />
+                </Badge>
+              </IconButton>
+            </Toolbar>
+          </AppBar>
+          <Drawer
+            variant="permanent"
+            classes={{
+              paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
+            }}
+            open={open}
+          >
+            <div className={classes.toolbarIcon}>
+              <IconButton onClick={() => handleDrawerState(false)}>
+                <ChevronLeftIcon />
+              </IconButton>
+            </div>
+            <Divider />
+              <MainListItemsAddEducator />
+            <Divider />
+            <List>{secondaryListItems}</List>
+          </Drawer>
+          <main className={classes.content}>
+            <div className={classes.appBarSpacer} xs={12} md={6} lg={3}/>
+            <Container maxWidth="lg" style={{marginTop: '60px'}}>
               <Grid container spacing={2}>
                 <Grid item lg={12}>
-                  <Grid container justify="center" alignItems="center" spacing={40}>
-                    <h1>Add Course :</h1>
+                  <Grid container spacing={40}>
+                    <h1>Add Educator :</h1>
                   </Grid>
                 </Grid>
               </Grid>
-              <Grid container spacing={0} style={{marginTop: '10px',marginLeft: '300px'}}>                
+              <Grid container spacing={0} xs={12} md={12} lg={12} style={{marginTop: '10px'}}>                
                 <Grid item lg={12} className="d-flex">
                   <FormControl>
                     <Row>
-                      <FormLabel style={{marginRight: '20px'}}>Course Name :</FormLabel>
-                      <Input id="my-input" aria-describedby="my-helper-text" placeholder="  name"/>
+                      <FormLabel style={{marginRight: '58px'}}>Educator Title :</FormLabel>
+                      <Select native placeholder="Title">
+                        <option aria-label="None" value="" />
+                        <option value={10}>Prof.</option>
+                        <option value={20}>Assisstant Prof.</option>
+                        <option value={30}>Dr.</option>
+                      </Select>
                     </Row>
                   </FormControl>
                 </Grid>
-                <Grid item lg={12} className="d-flex">
+                <Grid item xs={12} md={12} lg={12} className="d-flex" style={{marginTop: '20px'}}>
                   <FormControl>
                     <Row>
-                      <FormLabel style={{marginRight: '20px'}}>Course Code :</FormLabel>
-                      <Input id="my-input" aria-describedby="my-helper-text" placeholder="  code"/>
+                      <FormLabel style={{marginRight: '20px'}}>Educator First Name :</FormLabel>
+                      <Input id="my-input" aria-describedby="my-helper-text" placeholder="  Without Title"/>
                     </Row>
                   </FormControl>
                 </Grid>
-                <Grid item lg={12} className="d-flex">
+                <Grid item xs={12} md={12} lg={12} className="d-flex" style={{marginTop: '20px'}}>
                   <FormControl>
                     <Row>
-                      <FormLabel style={{marginRight: '20px'}}>Course For Department :</FormLabel>
+                      <FormLabel style={{marginRight: '20px'}}>Educator Last Name :</FormLabel>
+                      <Input id="my-input" aria-describedby="my-helper-text" placeholder="  Last Name"/>
+                    </Row>
+                  </FormControl>
+                </Grid>
+                <Grid item lg={12} className="d-flex" style={{marginTop: '20px'}}>
+                  <FormControl>
+                    <Row>
+                      <FormLabel style={{marginRight: '20px'}}>Educator Department :</FormLabel>
                       <Select native>
                         <option aria-label="None" value="" />
-                        <option value={10}>Common Course</option>
                         <option value={10}>CSE</option>
                         <option value={20}>ECE</option>
                         <option value={30}>ME</option>
@@ -232,21 +261,22 @@ function AddCourse(props) {
               </Grid>
               <Grid container spacing={2} style={{marginTop: '20px'}}>
                 <Grid item lg={12}>
-                  <Grid container justify="center" alignItems="center" spacing={40}>
+                  <Grid container spacing={40}>
                   <Button variant="contained" size="large" color="primary" className={classes.margin}>
-                    Add Course
+                    Add Educator
                   </Button>
                   </Grid>
                 </Grid>
               </Grid>
-            </Container>
-        </main>
-      </div>
+            </Container>  
+          </main>
+        </div>
+      </>
     );
   }
 
-AddCourse.propTypes = {
+AddEducator.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withSnackbar(withStyles(styles)(AddCourse));
+export default withSnackbar(withStyles(styles)(AddEducator));

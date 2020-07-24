@@ -18,7 +18,7 @@ import Paper from '@material-ui/core/Paper';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
-import { mainListItems, secondaryListItems } from './ListItemsCourse';
+import { mainListItems, secondaryListItems } from './ListItems/ListItemsCourse';
 import authentication from '../services/authentication';
 import { withSnackbar } from 'notistack';
 import { Redirect } from 'react-router-dom';

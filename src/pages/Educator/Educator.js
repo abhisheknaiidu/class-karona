@@ -18,10 +18,10 @@ import Paper from '@material-ui/core/Paper';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
-import { secondaryListItems } from '../Components/listItemsEducator';
-import MainListItemsEducator from '../Components/MainListItemsEducator'
-import ScheduledClasses from '../Components/ScheduledClasses';
-import authentication from '../services/authentication';
+import { secondaryListItems } from '../../Components/ListItems/listItemsEducator';
+import MainListItemsEducator from '../../Components/MainLists/MainListItemsEducator';
+import ScheduledClassesEducator from '../../Components/ScheduledClasses/ScheduledClassesEducator';
+import authentication from '../../services/authentication';
 import { withSnackbar } from 'notistack';
 import { Redirect } from 'react-router-dom';
 import ExitToAppTwoToneIcon from '@material-ui/icons/ExitToAppTwoTone';
@@ -195,7 +195,7 @@ function Educator(props) {
               {/* ScheduledClasses */}
               <Grid item xs={12} md={12} lg={12}>
                 <Paper className={fixedHeightPaper}>
-                  <ScheduledClasses />
+                  <ScheduledClassesEducator />
                 </Paper>
               </Grid>
               <Box pt={4}>

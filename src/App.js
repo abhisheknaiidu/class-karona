@@ -3,18 +3,17 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { SnackbarProvider } from 'notistack';
 import Login from './pages/Login';
 import PageNotFound from './pages/PageNotFound';
-import Student from './pages/Student';
-import Educator from './pages/Educator';
-import InstituteAdmin from './pages/InstituteAdmin';
+import Student from './pages/Student/Student';
+import Educator from './pages/Educator/Educator';
+import InstituteAdmin from './pages/InstituteAdmin/InstituteAdmin';
 import { auth, firestore } from './firebase';
 import ParticularCourse from './Components/ParticularCourse';
-import AddEducator from './pages/AddEducator';
-import AddCourse from './pages/AddCourse';
+import AddEducator from './pages/InstituteAdmin/AddEducator';
+import AddCourse from './pages/Educator/AddCourse';
 import RecentNotes from './pages/RecentNotes';
 import RecentStreams from './pages/RecentStreams';
 import TimeTable from './pages/TimeTable';
 import OverallAttendence from './pages/OverallAttendence';
-
 
 const initialState = {
   ready: false,

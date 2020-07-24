@@ -41,7 +41,7 @@ export default function NestedList() {
       </ListItem>
       <ListItem button>
         <ListItemIcon>
-            <Link to="instituteadmin/addeducator"><PersonAddIcon fontSize="medium" color="primary"/></Link>
+            <Link to="instituteadmin/addeducator" ><PersonAddIcon style={{ textDecoration:'none', color: 'white' }} fontSize="medium" color="primary"/></Link>
         </ListItemIcon>
         <ListItemText primary="Add Educators" />
       </ListItem>
