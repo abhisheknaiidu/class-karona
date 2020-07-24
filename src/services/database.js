@@ -28,13 +28,13 @@ database.getCourseDetails = (courseId) => {
     })
 }
 
-database.enrollStudentToCourse = (studentUserId, courseId) => {
+database.enrollUserToCourse = (userId, courseId) => {
   return new Promise((resolve, reject) => {
-    database.getEnrolledCourseIds(studentUserId)
+    database.getEnrolledCourseIds(userId)
       .then((existingCourses) => {
         var newCourseList = existingCourses.push(courseId);
-        const studentDoc = firestore.collection('users').doc(studentUserId);
-        studentDoc.set({courses : newCourseList}, {merge: true})
+        const userDoc = firestore.collection('users').doc(userId);
+        userDoc.set({courses : newCourseList}, {merge: true})
           .then((response) => {
             resolve(response);
           })
@@ -42,9 +42,51 @@ database.enrollStudentToCourse = (studentUserId, courseId) => {
             reject(reason);
           })
       })
+      .catch((reason) => {
+        reject(reason);
+      })
+  })
+  .catch((reason) => {
+    reject(reason);
   })
 };
 
+database.createNewCourse = (courseName, courseDescription, courseCode, educatorId) => {
+  return new Promise((resolve, reject) => {
+    firestore.collection('courses').add({
+      courseCode: courseCode,
+      courseName: courseName,
+      courseDescription: courseDescription,
+      educatorId: educatorId,
+    })
+    .then((courseId) => {
+      database.enrollUserToCourse(educatorId, courseId)
+        .then((response) => {
+          resolve(response);
+        })
+        .catch((reason) => {
+          reject(reason);
+        })
+    })
+    .catch((reason) => {
+      reject(reason);
+    })
+  })
+}
 
+database.createEducatorInvite = (educatorEmailAddress) => {
+  return new Promise((resolve, reject) => {
+    firestore.collection('educatorInvites').add({
+      email: educatorEmailAddress,
+      timestamp: firebase.firestore.Timestamp.fromDate(Date.now())
+    })
+    .then((invite) => {
+      resolve(invite.id);
+    })
+    .catch((reason) => {
+      reject(reason);
+    })
+  })
+}
 
 export default database;
