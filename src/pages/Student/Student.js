@@ -14,18 +14,16 @@ import IconButton from '@material-ui/core/IconButton';
 import Badge from '@material-ui/core/Badge';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
-import { secondaryListItems } from '../Components/listItemsEducator';
-import MainListItemsIA from '../Components/MainListItemsIA'
-import ScheduledClasses from '../Components/ScheduledClasses';
-import authentication from '../services/authentication';
+import { mainListItems, secondaryListItems } from '../../Components/ListItems/listItemsStudent';
+import ScheduledClassesStudent from '../../Components/ScheduledClasses/ScheduledClassesStudent';
+import authentication from '../../services/authentication';
 import { withSnackbar } from 'notistack';
 import { Redirect } from 'react-router-dom';
 import ExitToAppTwoToneIcon from '@material-ui/icons/ExitToAppTwoTone';
-// import {Form,FormGroup,Modal, ModalBody, ModalHeader, Button, Label, Input} from 'reactstrap';
+import NotificationsStudent from '../../Components/NotificationsStudent';
 
 const drawerWidth = 240;
 
@@ -58,9 +56,9 @@ const styles = (theme) => ({
       duration: theme.transitions.duration.enteringScreen,
     }),
   },
-  menuButton: {
-    marginRight: 750,
-  },
+  // menuButton: {
+  //   marginRight: 750,
+  // },
   menuButtonHidden: {
     display: 'none',
   },
@@ -108,7 +106,7 @@ const styles = (theme) => ({
   },
 });
 
-function InstituteAdmin(props) {
+function Student(props) {
 
   const [open, setOpen] = useState(false);
 
@@ -134,9 +132,6 @@ function InstituteAdmin(props) {
 
     const { classes, access, user } = props;
     
-
-    const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
-
     if(!user || access !== 'student') {
       return (
         <Redirect to="/" />
@@ -144,73 +139,71 @@ function InstituteAdmin(props) {
     }
 
     return (
-      <>
-        <div className={classes.root}>
-          <CssBaseline />
-          <AppBar position="fixed" className={clsx(classes.appBar, open && classes.appBarShift)}>
-            <Toolbar className={classes.toolbar}>
-              <IconButton
-                edge="start"
-                color="inherit"
-                aria-label="open drawer"
-                onClick={() => handleDrawerState(true)}
-                className={clsx(classes.menuButton, open && classes.menuButtonHidden)}
-              >
-                <MenuIcon />
-              </IconButton>
-              <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-                My Desk
-              </Typography>
-              <IconButton color="inherit">
-                <Badge badgeContent={0} color="secondary">
-                  <NotificationsIcon />
-                </Badge>
-              </IconButton>
-              <IconButton color="inherit" onClick={() => signOut()}>
-                <Badge badgeContent={0} color="secondary">
-                  <ExitToAppTwoToneIcon />
-                </Badge>
-              </IconButton>
-            </Toolbar>
-          </AppBar>
-          <Drawer
-            variant="permanent"
-            classes={{
-              paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
-            }}
-            open={open}
-          >
-            <div className={classes.toolbarIcon}>
-              <IconButton onClick={() => handleDrawerState(false)}>
-                <ChevronLeftIcon />
-              </IconButton>
-            </div>
-            <Divider />
-              < MainListItemsIA />
-            <Divider />
-            <List>{secondaryListItems}</List>
-          </Drawer>
-          <main className={classes.content}>
-            <div className={classes.appBarSpacer} />
-            <Container maxWidth="lg" className={classes.container}>
-              <Grid container spacing={3}>
-                <Grid item xs={12} md={12} lg={12}>
-                  <Paper className={fixedHeightPaper}>
-                    <ScheduledClasses />
-                  </Paper>
-                </Grid>
-                <Box pt={4}>
-                </Box>
+      <div className={classes.root}>
+        <CssBaseline />
+        <AppBar position="fixed" className={clsx(classes.appBar, open && classes.appBarShift)}>
+          <Toolbar className={classes.toolbar}>
+            <IconButton
+              edge="start"
+              color="inherit"
+              aria-label="open drawer"
+              onClick={() => handleDrawerState(true)}
+              className={clsx(classes.menuButton, open && classes.menuButtonHidden)}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
+              My Desk
+            </Typography>
+            <IconButton color="inherit">
+              <Badge badgeContent={0} color="secondary">
+                <NotificationsIcon />
+              </Badge>
+            </IconButton>
+            <IconButton color="inherit" onClick={() => signOut()}>
+              <Badge badgeContent={0} color="secondary">
+                <ExitToAppTwoToneIcon />
+              </Badge>
+            </IconButton>
+          </Toolbar>
+        </AppBar>
+        <Drawer
+          variant="permanent"
+          classes={{
+            paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
+          }}
+          open={open}
+        >
+          <div className={classes.toolbarIcon}>
+            <IconButton onClick={() => handleDrawerState(false)}>
+              <ChevronLeftIcon />
+            </IconButton>
+          </div>
+          <Divider />
+          <List>{mainListItems}</List>
+          <Divider />
+          <List>{secondaryListItems}</List>
+        </Drawer>
+        <main className={classes.content}>
+          <div className={classes.appBarSpacer} />
+          <Container maxWidth="lg" className={classes.container}>
+            <Grid container spacing={3}>
+              {/* ScheduledClassesStudent */}
+              <Grid item xs={12} md={12} lg={12}>
+                  <NotificationsStudent />
+                  <ScheduledClassesStudent />
               </Grid>
-            </Container>
-          </main>
-        </div>
-      </>
+              <Box pt={4}>
+              </Box>
+            </Grid>
+          </Container>
+        </main>
+      </div>
     );
   }
 
-InstituteAdmin.propTypes = {
+Student.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withSnackbar(withStyles(styles)(InstituteAdmin));
+export default withSnackbar(withStyles(styles)(Student));
