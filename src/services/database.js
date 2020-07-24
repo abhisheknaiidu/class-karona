@@ -74,6 +74,79 @@ database.createNewCourse = (courseName, courseDescription, courseCode, educatorI
   })
 }
 
+database.createNewClass = (courseId, startTime, endTime) => {
+  return new Promise((resolve, reject) => {
+    firestore.collection('classes').add({
+      courseId: courseId,
+      startTime: firebase.firestore.Timestamp.fromDate(startTime),
+      endTime: firebase.firestore.Timestamp.fromDate(endTime),
+    })
+    .then((docRef) => {
+      resolve(docRef.id);
+    })
+    .catch((reason) => {
+      reject(reason);
+    })
+  })
+}
+
+database.getUpcomingClassesForUser = (courseIdArray) => {
+  return new Promise((resolve, reject) => {
+    firestore.collection('classes')
+      .where("courseId", "in", courseIdArray)
+      .where("endTimestamp", ">=", firebase.firestore.Timestamp.fromDate(Date.now()))
+      .get()
+      .then((classes) => {
+        resolve(classes);
+      })
+      .catch((reason) => {
+        reject(reason);
+      })
+  })
+}
+
+database.getAllClassesForCourse = (courseId) => {
+  return new Promise((resolve, reject) => {
+    firestore.collection('classes')
+      .where("courseId", "==", courseId)
+      .get()
+      .then((classes) => {
+        resolve(classes);
+      })
+      .catch((reason) => {
+        reject(reason);
+      })
+  })
+}
+
+database.removeClass = (classId) => {
+  return new Promise((resolve, reject) => {
+    firestore.collection('classes')
+      .doc(classId)
+      .delete()
+      .then((classDoc) => {
+        resolve(classDoc);
+      })
+      .catch((reason) => {
+        reject(reason);
+      })
+  })
+}
+
+database.getClassDetails = (classId) => {
+  return new Promise((resolve, reject) => {
+    firestore.collection('classes')
+      .doc(classId)
+      .get()
+      .then((classDoc) => {
+        resolve(classDoc);
+      })
+      .catch((reason) => {
+        reject(reason);
+      })
+  })
+}
+
 database.createEducatorInvite = (educatorEmailAddress) => {
   return new Promise((resolve, reject) => {
     firestore.collection('educatorInvites').add({
