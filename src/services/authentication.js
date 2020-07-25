@@ -197,14 +197,14 @@ authentication.signInWithEducatorInvite = (inviteCode, providerId) => {
         resolve(firestore.collection('educatorInvites').doc(inviteCode)
           .get()
           .then((inviteDoc) => {
-            createTimestamp = inviteDoc.toDate().getTime();
-            currTimeStamp = Date.now().getTime();
+            const createTimestamp = inviteDoc.toDate().getTime();
+            const currTimeStamp = Date.now().getTime();
             if(currTimeStamp - createTimestamp <= 86400 * 1000 && !inviteDoc.redeemedAt) {
               firestore.collection('educatorInvites').doc(inviteCode)
                 .set({redeemedAt: firebase.firestore.Timestamp.fromDate(Date.now())}, {merge: true})
                 .then(
                   firestore.collection('users').doc(uid).set({role: 'educator'}, {merge: true})
-                    .then({
+                    .then((user) => {
                       resolve(user);
                     })
                     .catch((reason) => {
