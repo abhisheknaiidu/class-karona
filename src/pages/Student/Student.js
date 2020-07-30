@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
@@ -24,6 +24,8 @@ import { withSnackbar } from 'notistack';
 import { Redirect } from 'react-router-dom';
 import ExitToAppTwoToneIcon from '@material-ui/icons/ExitToAppTwoTone';
 import NotificationsStudent from '../../Components/NotificationsStudent';
+import firebase from '../../firebase'
+
 
 const drawerWidth = 240;
 
@@ -108,6 +110,16 @@ const styles = (theme) => ({
 
 function Student(props) {
 
+  const [courses, setCourse] = React.useState([]);
+
+  useEffect( () => {
+    firebase.firestore().collection('courses').get().then( querySnapshot => { 
+     //   console.log(snapshot.docs.map(doc => doc.data().courseCode))
+      setCourse(querySnapshot.docs.map(doc => doc.data()))
+     })
+    //  setLoading(false);
+ },[]);
+
   const [open, setOpen] = useState(false);
 
   function handleDrawerState(drawerState) {
@@ -191,7 +203,7 @@ function Student(props) {
               {/* ScheduledClassesStudent */}
               <Grid item xs={12} md={12} lg={12}>
                   <NotificationsStudent />
-                  <ScheduledClassesStudent />
+                  <ScheduledClassesStudent courses={courses} />
               </Grid>
               <Box pt={4}>
               </Box>
