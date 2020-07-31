@@ -18,11 +18,6 @@ const useStyles = makeStyles({
     media: {
       height: 140,
     },
-    // cards: {
-    //     display: 'flex',
-    //     maxWidth: '100%',
-    //     flexBasis: '82%', 
-    // }
   });
 
 function ScheduledClassesStudent({courses}) {
@@ -34,9 +29,9 @@ function ScheduledClassesStudent({courses}) {
      cards = courses.map( (item,i) => { 
         //  console.log(item)
      return (
-        <Grid key={i} container spacing={2}>
+        
         <Grid item xs={12} md={6} lg={4}>
-            <Card className={classes.root}>
+            <Card key={i} className={classes.root}>
                 <CardActionArea>
                     <CardMedia
                     className={classes.media}
@@ -64,13 +59,15 @@ function ScheduledClassesStudent({courses}) {
                 </CardActions>
             </Card>
           </Grid>
-        </Grid>
+        // </Grid>
         )
      })  
 
        return(
            <div className={classes.cards}>
-               {cards}
+               <Grid container spacing={2}>
+                {cards}
+               </Grid>
            </div>
     );
 }
