@@ -26,6 +26,7 @@ import { Button ,Row} from 'react-bootstrap';
 import FormControl from '@material-ui/core/FormControl';
 import {Input,Select} from '@material-ui/core';
 import FormLabel from '@material-ui/core/FormLabel';
+import firebase from '../../firebase'
 
 const drawerWidth = 240;
 
@@ -111,7 +112,21 @@ const styles = (theme) => ({
 function AddCourse(props) {
 
   const [open, setOpen] = useState(false);
-
+  const [courseCode, setCourseCode] = useState('');
+  const [courseDescription, setCourseDescription] = useState('');
+  const [branch, setBranch] = useState('');
+  const addCourse = (event) => {
+    event.preventDefault();
+    firebase.firestore().collection('courses').add({
+      courseCode: courseCode,
+      courseDescription: courseDescription,
+      branch: branch,
+      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+    })
+    setCourseCode('');
+    setCourseDescription('');
+    setBranch('');
+  }
   function handleDrawerState(drawerState) {
     setOpen(drawerState)
   };
@@ -139,6 +154,8 @@ function AddCourse(props) {
         <Redirect to="/" />
       )
     }
+
+    console.log(branch);
 
     return (
       <div className={classes.root}>
@@ -201,7 +218,7 @@ function AddCourse(props) {
                   <FormControl>
                     <Row>
                       <FormLabel style={{marginRight: '20px'}}>Course Name :</FormLabel>
-                      <Input id="my-input" aria-describedby="my-helper-text" placeholder="  name"/>
+                      <Input onChange={event => setCourseDescription(event.target.value)} value={courseDescription}  placeholder="course name" />
                     </Row>
                   </FormControl>
                 </Grid>
@@ -209,7 +226,7 @@ function AddCourse(props) {
                   <FormControl>
                     <Row>
                       <FormLabel style={{marginRight: '20px'}}>Course Code :</FormLabel>
-                      <Input id="my-input" aria-describedby="my-helper-text" placeholder="  code"/>
+                      <Input id="my-input" onChange={event => setCourseCode(event.target.value)} value={courseCode} placeholder="course code" />
                     </Row>
                   </FormControl>
                 </Grid>
@@ -217,13 +234,12 @@ function AddCourse(props) {
                   <FormControl>
                     <Row>
                       <FormLabel style={{marginRight: '20px'}}>Course For Department :</FormLabel>
-                      <Select native>
-                        <option aria-label="None" value="" />
-                        <option value={10}>Common Course</option>
-                        <option value={10}>CSE</option>
-                        <option value={20}>ECE</option>
-                        <option value={30}>ME</option>
-                        <option value={30}>Design</option>
+                      <Select onChange={event => setBranch(event.target.value)} native>
+                        <option aria-label="None" value='' />
+                        <option value='cse'>CSE</option>
+                        <option value='ece'>ECE</option>
+                        <option value='me'>ME</option>
+                        <option value='design'>Design</option>
                       </Select>
                     </Row>
                   </FormControl>
@@ -232,7 +248,7 @@ function AddCourse(props) {
               <Grid container spacing={2} style={{marginTop: '20px'}}>
                 <Grid item xs={12} md={12} lg={12}>
                   <Grid container spacing={40}>
-                  <Button variant="contained" size="large" color="primary" className={classes.margin}>
+                  <Button onClick={addCourse} variant="contained" size="large" color="primary" className={classes.margin}>
                     Add Course
                   </Button>
                   </Grid>
