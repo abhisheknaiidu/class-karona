@@ -144,9 +144,6 @@ function Educator(props) {
 
     const { classes, access, user } = props;
     
-
-    const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
-
     if(!user || access !== 'student') {
       return (
         <Redirect to="/" />
