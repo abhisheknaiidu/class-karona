@@ -4,6 +4,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import AddToPhotosIcon from '@material-ui/icons/AddToPhotos';
+import {Link} from 'react-router-dom';
 
 export const secondaryListItems = (
   <div>
@@ -13,11 +14,13 @@ export const secondaryListItems = (
       </ListItemIcon>
       <ListItemText primary="Notes" />
       </ListItem>
+    <Link style={{ textDecoration:'none', color: 'white' }} to="/educator/addcourse">
       <ListItem button>
-      <ListItemIcon>
-        <AddToPhotosIcon />
-      </ListItemIcon>
-      <ListItemText primary="Add Course" />
-    </ListItem>
+        <ListItemIcon>
+          <AddToPhotosIcon />
+        </ListItemIcon>
+        <ListItemText primary="Add Course" />
+      </ListItem>
+    </Link>
   </div>
 );

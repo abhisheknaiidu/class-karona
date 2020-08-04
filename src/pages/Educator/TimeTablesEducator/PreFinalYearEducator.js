@@ -18,14 +18,15 @@ import Grid from '@material-ui/core/Grid';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
-import { secondaryListItems } from '../../Components/ListItems/listItemsEducator';
-import MainListItemsEducator from '../../Components/MainLists/MainListItemsEducator';
-import ScheduledClassesEducator from '../../Components/ScheduledClasses/ScheduledClassesEducator';
-import authentication from '../../services/authentication';
+//absolute paths 
+import { secondaryListItems } from 'Components/ListItems/listItemsEducator';
+import MainListItemsEducator from 'Components/MainLists/MainListItemsEducator';
+import PreFinalYear from 'Components/TimeTables/PreFinalYear';
+import authentication from 'services/authentication';
 import { withSnackbar } from 'notistack';
 import { Redirect } from 'react-router-dom';
 import ExitToAppTwoToneIcon from '@material-ui/icons/ExitToAppTwoTone';
-import firebase from '../../firebase';
+import firebase from 'firebase';
 
 const drawerWidth = 240;
 
@@ -108,17 +109,17 @@ const styles = (theme) => ({
   },
 });
 
-function Educator(props) {
+function PreFinalYearEducator(props) {
 
-  const [courses, setCourse] = React.useState([]);
+//   const [courses, setCourse] = React.useState([]);
 
-  useEffect( () => {
-    firebase.firestore().collection('courses').get().then( querySnapshot => { 
-     //   console.log(snapshot.docs.map(doc => doc.data().courseCode))
-      setCourse(querySnapshot.docs.map(doc => doc.data()))
-     })
-    //  setLoading(false);
- },[]);
+//   useEffect( () => {
+//     firebase.firestore().collection('courses').get().then( querySnapshot => { 
+//      //   console.log(snapshot.docs.map(doc => doc.data().courseCode))
+//       setCourse(querySnapshot.docs.map(doc => doc.data()))
+//      })
+//     //  setLoading(false);
+//  },[]);
 
   const [open, setOpen] = useState(false);
 
@@ -202,7 +203,7 @@ function Educator(props) {
             <Grid container spacing={3}>
               {/* ScheduledClasses */}
               <Grid item xs={12} md={12} lg={12}>
-                  <ScheduledClassesEducator courses={courses}/>
+                <PreFinalYear />
               </Grid>
               <Box pt={4}>
               </Box>
@@ -213,8 +214,8 @@ function Educator(props) {
     );
   }
 
-Educator.propTypes = {
+  PreFinalYearEducator.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withSnackbar(withStyles(styles)(Educator));
+export default withSnackbar(withStyles(styles)(PreFinalYearEducator));

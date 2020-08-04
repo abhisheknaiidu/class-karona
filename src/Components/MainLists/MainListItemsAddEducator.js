@@ -10,6 +10,7 @@ import BarChartIcon from '@material-ui/icons/BarChart';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
+import {Link} from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -32,12 +33,14 @@ export default function NestedList() {
 
   return (
     <>
-      <ListItem button>
-        <ListItemIcon>
-          <DashboardIcon />
-        </ListItemIcon>
-        <ListItemText primary="DashBoard" />
-      </ListItem>
+      <Link style={{ textDecoration:'none', color: 'white' }} to="/educator">
+        <ListItem button>
+          <ListItemIcon>
+            <DashboardIcon />
+          </ListItemIcon>
+          <ListItemText primary="DashBoard" />
+        </ListItem>
+      </Link>
       <ListItem button>
         <ListItemIcon>
             <PersonAddIcon />
@@ -53,30 +56,38 @@ export default function NestedList() {
       </ListItem>
       <Collapse in={open} unmountOnExit>
         <List component="div" disablePadding>
+        <Link style={{ textDecoration:'none', color: 'white' }} to="/freshmanyeartimetable">
           <ListItem button className={classes.nested}>
             <ListItemIcon>
               <BarChartIcon />
             </ListItemIcon>
             <ListItemText primary="Freshman Year" />
           </ListItem>
+        </Link>
+        <Link style={{ textDecoration:'none', color: 'white' }} to="/educator">
           <ListItem button className={classes.nested}>
             <ListItemIcon>
               <BarChartIcon />
             </ListItemIcon>
             <ListItemText primary="Sophomore Year" />
           </ListItem>
+        </Link>
+        <Link style={{ textDecoration:'none', color: 'white' }} to="/educator">
           <ListItem button className={classes.nested}>
             <ListItemIcon>
               <BarChartIcon />
             </ListItemIcon>
             <ListItemText primary="Pre-final Year" />
           </ListItem>
+        </Link>
+        <Link style={{ textDecoration:'none', color: 'white' }} to="/educator">
           <ListItem button className={classes.nested}>
             <ListItemIcon>
               <BarChartIcon />
             </ListItemIcon>
             <ListItemText primary="Final Year" />
           </ListItem>
+        </Link>
         </List>
       </Collapse>
       </>

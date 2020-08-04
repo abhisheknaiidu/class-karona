@@ -14,6 +14,10 @@ import RecentNotes from './pages/RecentNotes';
 import RecentStreams from './pages/RecentStreams';
 import TimeTable from './pages/TimeTable';
 import OverallAttendence from './pages/OverallAttendence';
+import FreshmanYearEducator from './pages/Educator/TimeTablesEducator/FreshmanYearEducator';
+import SophomoreYearEducator from './pages/Educator/TimeTablesEducator/SophomoreYearEducator';
+import PreFinalYearEducator from './pages/Educator/TimeTablesEducator/PreFinalYearEducator';
+import FinalYearEducator from './pages/Educator/TimeTablesEducator/FinalYearEducator';
 
 const initialState = {
   ready: false,
@@ -57,6 +61,10 @@ class App extends Component {
           <Router>
             <Switch>
               <Route exact path="/" component={withProps(Login, { user: user, access:access })}/>
+              <Route exact path="/educator/freshmanyeartimetable" component={withProps(FreshmanYearEducator, { user: user, access:access })}/>
+              <Route exact path="/educator/sophomoreyeartimetable" component={withProps(SophomoreYearEducator, { user: user, access:access })}/>
+              <Route exact path="/educator/prefinalyeartimetable" component={withProps(PreFinalYearEducator, { user: user, access:access })}/>
+              <Route exact path="/educator/finalyeartimetable" component={withProps(FinalYearEducator, { user: user, access:access })}/>
               <Route exact path="/student" component={withProps(Student, { user: user, access:access })} />
               <Route exact path="/educator" component={withProps(Educator, { user: user, access:access })} />
               <Route exact path="/educator/addcourse" component={withProps(AddCourse, { user: user, access:access })} />

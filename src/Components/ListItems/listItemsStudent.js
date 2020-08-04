@@ -10,32 +10,34 @@ import AccountBalanceIcon from '@material-ui/icons/AccountBalance';
 import { Link } from 'react-router-dom';
 
 export const mainListItems = (
-  <div>
-    <ListItem button>
-      <ListItemIcon>
-      <Link style={{ color: 'white' }} to="/student">
-        <DashboardIcon />
-      </Link>
-      </ListItemIcon>
-      <ListItemText primary="Dashboard" />
-    </ListItem>
+  <>
+    <div>
+    <Link style={{ textDecoration:'none', color: 'white' }} to="/student">
+      <ListItem button>
+        <ListItemIcon>
+          <DashboardIcon />
+        </ListItemIcon>
+        <ListItemText primary="Dashboard" />
+      </ListItem>
+    </Link>
     <Link style={{ textDecoration:'none', color: 'white' }} to="/student/recent_streams">
-    <ListItem button>
-      <ListItemIcon>
-        <PeopleIcon />
-      </ListItemIcon>
-      <ListItemText primary="Recent Streams" />
-    </ListItem>
+      <ListItem button>
+        <ListItemIcon>
+          <PeopleIcon />
+        </ListItemIcon>
+        <ListItemText primary="Recent Streams" />
+      </ListItem>
     </Link>
     <Link style={{ textDecoration:'none', color: 'white' }} to="/student/time_table">
-    <ListItem button>
-      <ListItemIcon>
-        <BarChartIcon />
-      </ListItemIcon>
-      <ListItemText primary="Time Table" />
-    </ListItem>
+      <ListItem button>
+        <ListItemIcon>
+          <BarChartIcon />
+        </ListItemIcon>
+        <ListItemText primary="Time Table" />
+      </ListItem>
     </Link>
-  </div>
+    </div>
+  </>
 );
 
 export const secondaryListItems = (
