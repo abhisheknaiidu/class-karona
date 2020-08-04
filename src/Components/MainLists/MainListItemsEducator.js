@@ -56,7 +56,7 @@ export default function NestedList() {
       </ListItem>
       <Collapse in={open} unmountOnExit>
         <List component="div" disablePadding>
-        <Link style={{ textDecoration:'none', color: 'white' }} to="educator/freshmanyeartimetable">
+        <Link style={{ textDecoration:'none', color: 'white' }} to="/educator/freshmanyeartimetable">
           <ListItem button className={classes.nested}>
             <ListItemIcon>
               <BarChartIcon />
@@ -64,7 +64,7 @@ export default function NestedList() {
             <ListItemText primary="Freshman Year" />
           </ListItem>
         </Link>
-        <Link style={{ textDecoration:'none', color: 'white' }} to="educator/sophomoreyeartimetable">
+        <Link style={{ textDecoration:'none', color: 'white' }} to="/educator/sophomoreyeartimetable">
           <ListItem button className={classes.nested}>
             <ListItemIcon>
               <BarChartIcon />
@@ -72,7 +72,7 @@ export default function NestedList() {
             <ListItemText primary="Sophomore Year" />
           </ListItem>
         </Link>
-        <Link style={{ textDecoration:'none', color: 'white' }} to="educator/prefinalyeartimetable">
+        <Link style={{ textDecoration:'none', color: 'white' }} to="/educator/prefinalyeartimetable">
           <ListItem button className={classes.nested}>
             <ListItemIcon>
               <BarChartIcon />
@@ -80,7 +80,7 @@ export default function NestedList() {
             <ListItemText primary="Pre-final Year" />
           </ListItem>
         </Link>
-        <Link style={{ textDecoration:'none', color: 'white' }} to="educator/finalyeartimetable">
+        <Link style={{ textDecoration:'none', color: 'white' }} to="/educator/finalyeartimetable">
           <ListItem button className={classes.nested}>
             <ListItemIcon>
               <BarChartIcon />
