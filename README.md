@@ -1,4 +1,8 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## ClassKarona
+
+This is an Open Source - all in one Institute Management System to host classes, notes, post attendance, show time table,etc. In simple words, it's taking your college to the cloud!. ClassKaroNa is a need of the hour web app in times of a pandemic such as COVID-19 where students and teachers alike are suffering from the consequence of a poorly managed effort by institutes to hastly move all offline affairs to online mode, ClassKaroNa plans to make that transition smoother. Have fun contributing!
+
+Link to demo project - http://class-karona.vercel.app/
 
 ## Available Scripts
 
