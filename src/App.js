@@ -18,6 +18,7 @@ import FreshmanYearEducator from './pages/Educator/TimeTablesEducator/FreshmanYe
 import SophomoreYearEducator from './pages/Educator/TimeTablesEducator/SophomoreYearEducator';
 import PreFinalYearEducator from './pages/Educator/TimeTablesEducator/PreFinalYearEducator';
 import FinalYearEducator from './pages/Educator/TimeTablesEducator/FinalYearEducator';
+import { createUserProfileDocument } from './services/utils';
 
 const initialState = {
   ready: false,
@@ -99,22 +100,41 @@ class App extends Component {
           .collection('users')
           .doc(user.uid)
           .onSnapshot(
-            (snapshot) => {
-              const data = snapshot.data();
+            async (snapshot) => {
 
-              if (!snapshot.exists || !data) {
+              let userData;
+              if (!snapshot.exists) {
+                const newUser = await createUserProfileDocument(user.uid, "student")
+
+                const getData = await newUser.get()
+                userData = getData.data();
+
+              }
+              else
+                userData = snapshot.data();
+
+              if (!userData) {
                 if (this.userDocumentSnapshotListener) {
                   this.userDocumentSnapshotListener();
                 }
                 this.resetState();
                 return;
-              }
+               }
+
+
+              // if (!snapshot.exists || !data) {
+              //   if (this.userDocumentSnapshotListener) {
+              //     this.userDocumentSnapshotListener();
+              //   }
+              //   this.resetState();
+              //   return;
+              // }
 
               this.setState({
                 ready: true,
                 user: user,
-                userData: data,
-                access: data.role,
+                userData: userData,
+                access: userData.role,
               });
 
               console.log(this.state)
