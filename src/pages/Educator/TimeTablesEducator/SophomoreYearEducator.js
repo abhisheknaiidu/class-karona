@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
@@ -26,7 +26,6 @@ import authentication from 'services/authentication';
 import { withSnackbar } from 'notistack';
 import { Redirect } from 'react-router-dom';
 import ExitToAppTwoToneIcon from '@material-ui/icons/ExitToAppTwoTone';
-import firebase from 'firebase';
 
 const drawerWidth = 240;
 
